@@ -1,5 +1,4 @@
 .DS_Store
-.svn
 .sass-cache
 bin
 public/uc
@@ -8,19 +7,6 @@ tmp
 db/openid-store
 db/*sqlite3
 db/sphinx
-config/*.sphinx.conf
-config/environment.rb
-config/sphinx.yml
-config/redis.yml
-config/unicorn.yml
-config/mail_fetcher.yml
-config/mongrel_cluster.yml
-config/database.yml
-config/thin.yml
-config/tlogs/session.yml
-config/tlogs/domains.yml
-config/robox.yml
-config/settings.yml
 script/sync
 log/
 public/javascripts/all.js
@@ -32,4 +18,3 @@ public/google*html
 public/cd6539b09d112a53ba4098fe.html
 .bundle
 vendor/bundle
-.ruby-version

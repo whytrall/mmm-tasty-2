@@ -21,22 +21,22 @@
   <%= render :partial => 'adv_sidebar_right' %>
 <% end %>
 <% content_for :sidebar_left do %>
-  <h2 class='center'><span>Авторы</span></h2>
+  <!--h2 class='center'><span>Авторы</span></h2>
   <div class='users'>
-    <% User.find([2, 1]).each do |user| %>
+    <%# User.find([2, 1]).each do |user| %>
       <div>
-        <%= link_to_tlog user, :link => :userpic, :empty => :blank %>
-        <p><%= link_to_tlog user %></p>
+        <%#= link_to_tlog user, :link => :userpic, :empty => :blank %>
+        <p><%#= link_to_tlog user %></p>
       </div>
-    <% end %>
+    <%# end %>
   </div>
   <h2 class='center'><span>Муза</span></h2>
   <div class='users'>
-    <% User.find([7]).each do |user| %>
+    <%# User.find([7]).each do |user| %>
       <div>
-        <%= link_to_tlog user, :link => :userpic, :empty => :blank %>
-        <p><%= link_to_tlog user %></p>
+        <%#= link_to_tlog user, :link => :userpic, :empty => :blank %>
+        <p><%#= link_to_tlog user %></p>
       </div>
-    <% end %>
-  </div>
+    <%# end %>
+  </div-->
 <% end %>

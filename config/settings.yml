@@ -15,7 +15,7 @@ billing:
   smsonline:
     login: user
     password: password
-    prices: tmp/smsonline.xml                 # this is used by script/fetch_smsonline_prices script
+    prices: config/smsonline.xml                 # this is used by script/fetch_smsonline_prices script
     countries:
       - ru
       - ua

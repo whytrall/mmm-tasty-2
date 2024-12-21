@@ -1,6 +1,6 @@
 # Environments
 development:
-  adapter: mysql
+  adapter: mysql2
   database: tlogs_development
   username: root
   password:
@@ -8,7 +8,7 @@ development:
   host: localhost
 
 test:
-  adapter: mysql
+  adapter: mysql2
   database: tlogs_test 
   username: root
   password:
@@ -16,7 +16,7 @@ test:
   host: localhost
 
 production:
-  adapter: mysql
+  adapter: mysql2
   database: tlogs_development
   username: root
   password: 

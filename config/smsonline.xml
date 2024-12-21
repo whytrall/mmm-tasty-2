@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <network>
+        <country>ru</country>           <!-- Country code (ru, ua, by, kz, md) -->
+        <shortnumber>1234</shortnumber> <!-- SMS short number -->
+        <operator_name>Name</operator_name>
+        <operator_code>beeline</operator_code>
+        <operator_id>1</operator_id>
+        <vat>value</vat>               <!-- VAT information -->
+        <sms_cost_vat>10.0</sms_cost_vat>  <!-- SMS cost including VAT -->
+        <sms_cost_loc>8.5</sms_cost_loc>   <!-- Local SMS cost -->
+        <payout_res>5.0</payout_res>       <!-- Payout amount -->
+        <currency>RUB</currency>           <!-- Currency (RUB, USD, BYR) -->
+    </network>
+    <!-- Multiple network elements can exist -->
+</root>

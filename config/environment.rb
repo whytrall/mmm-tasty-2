@@ -1,12 +1,14 @@
 # Be sure to restart your web server when you modify this file.
 
-RAILS_GEM_VERSION = '2.3.18' unless defined? RAILS_GEM_VERSION
+#RAILS_GEM_VERSION = '2.3.18' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 require File.join(File.dirname(__FILE__), '../lib/tlogs')
 
 Rails::Initializer.run do |config|
+  config.rails_lts_options = { :default => :hardened }
+  
   config.action_controller.session = { :expire_after => 315576000, :key => Tlogs::SESSION.key, :secret => Tlogs::SESSION.secret }
 
   config.autoload_paths += %W(

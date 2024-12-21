@@ -170,12 +170,12 @@ class AccountController < ApplicationController
 
   # регистрация, для новичков
   def signup
-    @invitation = Invitation.revokable.find_by_code params[:code]
+    #@invitation = Invitation.revokable.find_by_code params[:code]
 
-    render :action => 'signup_wall' and return unless @invitation
+    #render :action => 'signup_wall' and return unless @invitation
 
     if request.post?
-      @user = User.new :email => @invitation.email, :password => params[:user][:password], :url => params[:user][:url], :openid => nil, :eula => params[:user][:eula]
+      @user = User.new :email => params[:user][:email], :password => params[:user][:password], :url => params[:user][:url], :openid => nil, :eula => params[:user][:eula]
 
       # проверяем на левые емейл адреса
       @user.errors.add(:email, 'извините, но выбранный вами почтовый сервис находится в черном списке') if @user.email.any? && Disposable::is_disposable_email?(@user.email)
@@ -187,16 +187,16 @@ class AccountController < ApplicationController
       # @user.update_confirmation!(@user.email)
       @user.save if @user.errors.empty?
       if @user.errors.empty?
-        @user.log @invitation.user, :signup, "@#{@user.url} зарегистрировался по приглашению", nil, request.remote_ip
+        #@user.log @invitation.user, :signup, "@#{@user.url} зарегистрировался по приглашению", nil, request.remote_ip
         Emailer.deliver_signup(current_service, @user)
-        @invitation.update_attribute(:invitee_id, @user.id)
+        #@invitation.update_attribute(:invitee_id, @user.id)
 
         login_user @user, :remember => @user.email, :redirect_to => user_url(@user)
       else
         flash[:bad] = 'При регистрации произошли какие-то ошибки'
       end
     else
-      @user = User.new :email => @invitation.email
+      @user = User.new
     end
   end
 

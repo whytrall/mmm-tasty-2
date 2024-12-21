@@ -1,6 +1,16 @@
 source "https://rubygems.org"
 
-gem 'rails', '2.3.18'
+git 'https://github.com/makandra/rails.git', :branch => '2-3-lts' do
+  gem 'rails', '~>2.3.18'
+  gem 'actionmailer',     :require => false
+  gem 'actionpack',       :require => false
+  gem 'activerecord',     :require => false
+  gem 'activeresource',   :require => false
+  gem 'activesupport',    :require => false
+  gem 'railties',         :require => false
+  gem 'railslts-version', :require => false
+  gem 'rack',             :require => false
+end
 
 gem 'whenever', :require => false
 
@@ -14,7 +24,7 @@ end
 
 # databases
 
-gem 'mysql'
+gem 'mysql2', :git => 'https://github.com/makandra/mysql2', :branch => '0.2.x-lts'
 
 gem 'memcache-client', :require => 'memcache'
 
