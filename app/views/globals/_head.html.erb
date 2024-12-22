@@ -53,9 +53,6 @@
   window._token = "<%= form_authenticity_token %>";
 </script>
 
-<!-- google analytics code -->
-<%= render :partial => 'globals/gajs' %>
-
 <%- unless disable_css -%>
   <%= tasty_include_stylesheets :application %>
   <%- if current_site && %w(tlog conversations faves tags search).include?(params[:controller]) -%>

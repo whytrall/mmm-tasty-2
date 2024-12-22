@@ -15,5 +15,3 @@
       %div{:data => {:role => 'content', :theme => 'd'}}
         %h1 Упс! Вы попали на несуществующую страницу
         %p= link_to 'Вернуться на главную', service_url
-
-    = render :partial => 'globals/counters' if Rails.env.production?

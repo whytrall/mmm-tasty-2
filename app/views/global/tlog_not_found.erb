@@ -19,14 +19,6 @@
     p { font-family: 'Trebuchet MS', sans-serif; font-size: 12px; color: #666; }
     a { color: #134ebd; }
   </style>
-  
-  <%= render :partial => 'globals/gajs' %>
-  <script type='text/javascript'>
-    var _gaq = _gaq || [];
-    _gaq.push(['_trackEvent', 'Error', '404', 'Tlog not found']);
-  </script>
-</head>
-
 <body>
   <div class="dialog">
     <h1>Упс! Такого тлога не существует</h1>
@@ -39,7 +31,6 @@
       <% end %>
     </p>
   </div>
-
-  <%= render :partial => 'globals/counters' %>
 </body>
 </html>
+

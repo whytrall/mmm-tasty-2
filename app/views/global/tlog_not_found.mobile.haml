@@ -2,9 +2,6 @@
 %html
   %head
     = render :partial => 'globals/head'
-    :javascript
-      var _gaq = _gaq || [];
-      _gaq.push(['_trackEvent', 'Error', '404', 'Tlog not found']);
 
   %body{:lang => 'ru'}
     %div{:data => {:role => 'page'}}
@@ -22,5 +19,3 @@
             = link_to 'вернуться в свой тлог', user_url(current_user)
           - else
             = link_to 'зарегистрировать этот адрес', service_url(signup_path)
-
-    = render :partial => 'globals/counters' if Rails.env.production?

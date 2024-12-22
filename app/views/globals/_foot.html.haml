@@ -35,5 +35,3 @@
       %br
 
       = mail_to "feedback@#{current_service.domain}", nil, :encode => 'javascript'
-
-= render :partial => 'globals/counters' if Rails.env.production?
