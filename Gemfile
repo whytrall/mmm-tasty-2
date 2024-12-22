@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+gem 'ruby3-backward-compatibility'
+
 git 'https://github.com/makandra/rails.git', :branch => '2-3-lts' do
   gem 'rails', '~>2.3.18'
   gem 'actionmailer',     :require => false
@@ -11,6 +13,10 @@ git 'https://github.com/makandra/rails.git', :branch => '2-3-lts' do
   gem 'railslts-version', :require => false
   gem 'rack',             :require => false
 end
+
+gem 'racc'
+gem 'webrick'
+gem 'rexml'
 
 gem 'whenever', :require => false
 
@@ -24,7 +30,7 @@ end
 
 # databases
 
-gem 'mysql2', '~> 0.4.10'
+gem 'mysql2', '0.5.6'
 
 gem 'memcache-client', :require => 'memcache'
 
@@ -36,7 +42,7 @@ gem 'redis', '~> 2.2.0', :require => ["redis/connection/hiredis", "redis"]
 # extra
 
 gem 'mime-types'
-gem 'rake'
+gem 'rake', '~>13'
 gem 'rdoc'
 #gem 'system_timer'
 gem 'will_paginate', '~> 2.3.16'
@@ -79,3 +85,5 @@ group :development do
   gem 'capistrano'
   gem 'capistrano_colors'
 end
+
+gem 'digest'
