@@ -10,6 +10,6 @@ ActiveRecord::Base.class_eval do
     postfix = postfix.to_s.underscore
     # prefix ||= self.class.name.underscore
     # prefix != :bare ? "#{prefix.to_s.dasherize}-#{display_id}" : display_id
-    ([prefix.blank? ? nil : prefix, self.class.name.underscore, display_id, postfix.blank? ? nil : postfix].compact * '_').tr('/-.', '_')
+    ([prefix.blank? ? nil : prefix, self.class.name.underscore, display_id, postfix.blank? ? nil : postfix].compact * '_').gsub(/[\/\-\.]/, '_')
   end
 end

@@ -1,6 +1,7 @@
 #!/usr/bin/env rackup -p3000
-
-require "config/environment"
+require 'rack'
+require ::File.expand_path('../vendor/plugins/cdn_asset_path/lib/rack/asset_path', __FILE__)
+require ::File.expand_path('../config/environment', __FILE__)
 
 use Rails::Rack::LogTailer
 use Rack::AssetPath

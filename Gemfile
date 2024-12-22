@@ -19,16 +19,17 @@ group :production do
   gem 'newrelic-redis'
   gem 'newrelic_rpm'
   gem 'airbrake', :require => 'airbrake/rails'
-  gem 'unicorn', :require => false
+  # used in prod, we don't need that now gem 'unicorn', :require => false
 end
 
 # databases
 
-gem 'mysql2', :git => 'https://github.com/makandra/mysql2', :branch => '0.2.x-lts'
+gem 'mysql2', '~> 0.4.10'
 
 gem 'memcache-client', :require => 'memcache'
 
-gem 'hiredis', '~> 0.4.0'
+gem 'hiredis', '~> 0.6.3'
+
 gem 'redis', '~> 2.2.0', :require => ["redis/connection/hiredis", "redis"]
 
 
@@ -37,14 +38,14 @@ gem 'redis', '~> 2.2.0', :require => ["redis/connection/hiredis", "redis"]
 gem 'mime-types'
 gem 'rake'
 gem 'rdoc'
-gem 'system_timer'
+#gem 'system_timer'
 gem 'will_paginate', '~> 2.3.16'
 gem 'coderay'
 gem 'ruby-openid', :require => 'openid'
 gem 'hpricot'
 gem 'russian'
 
-gem 'json'
+gem 'json', '~> 1.8'
 
 
 # search

@@ -2,7 +2,7 @@ module AssetsHelper
   def tasty_include_stylesheets(*packages)
     options = packages.extract_options!
 
-    packages.map { |pack| tasty_include_stylesheet(pack, options) }
+    packages.map { |pack| tasty_include_stylesheet(pack, options) }.join("\n").html_safe
   end
 
   def tasty_include_stylesheet(name, options = {})
@@ -32,7 +32,7 @@ module AssetsHelper
 
   def tasty_include_javascripts(*packages)
     options = packages.extract_options!
-    packages.map { |pack| tasty_include_package(pack, options) }
+    packages.map { |pack| tasty_include_package(pack, options) }.join("\n").html_safe
   end
 
   def tasty_include_package(name, options = {})

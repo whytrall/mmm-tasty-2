@@ -1,9 +1,9 @@
 class AccountController < ApplicationController
-  before_filter :require_current_user, :only => [:logout, :rename, :identity, :confirmation_required]
-  before_filter :redirect_home_if_current_user, :only => [:index, :login, :signup, :openid_verify]
-  before_filter :require_confirmed_current_user, :except => [:logout]
+  before_filter :require_current_user, only: [:logout, :rename, :identity, :confirmation_required]
+  before_filter :redirect_home_if_current_user, only: [:index, :login, :signup, :openid_verify]
+  before_filter :require_confirmed_current_user, except: [:logout]
 
-  protect_from_forgery :only => [:login, :logout, :rename, :lost_password, :recover_password, :signup, :update_url_status]
+  protect_from_forgery only: [:login, :logout, :rename, :lost_password, :recover_password, :signup, :update_url_status]
 
   helper :settings
 
@@ -19,29 +19,28 @@ class AccountController < ApplicationController
       @user = User.authenticate(params[:user][:email], params[:user][:password])
       if @user.nil?
         # keep email
-        @user = User.new :email => params[:user][:email]
-        if params[:user][:email].is_openid?
+        @user = User.new(email: params[:user][:email])
+        if params[:user][:email].openid?
           flash[:bad] = 'Пользователь с таким адресом не найден'
         else
           user = User.find_by_email(params[:user][:email])
-          if user && user.is_disabled?
+          if user&.is_disabled?
             flash[:bad] = 'Аккаунт заблокирован'
           else
             flash[:bad] = 'Неправильный логин или пароль'
           end
         end
       # openid пользователь логинится через openid...
-      elsif @user.is_openid? && params[:user][:email].is_openid?
+      elsif @user.openid? && params[:user][:email].openid?
           login_with_openid @user.openid
       # иначе, даже если это openid пользователь - авторизуем по емейлу
       else
         @user.log nil, :login, "авторизовался на сайте", nil, request.remote_ip
-        login_user @user, { :remember => @user.email, :redirect_to => service_path(params[:ref]) }
+        login_user @user, remember: @user.email, redirect_to: service_path(params[:ref])
       end
     else
-      @user = User.new :email => cookies[:l]
-
-      session[:r] = params[:ref] || request.env['HTTP_REFERER'] if params[:noref].nil?
+      @user = User.new(email: cookies[:l])
+      session[:r] = params[:ref] || request.env['HTTP_REFERER'] if params[:noref].blank?
     end
   end
 
@@ -52,13 +51,10 @@ class AccountController < ApplicationController
       @user.url = params[:user][:url]
       @user.valid?
 
-      if !@user.errors.on("url")
+      if @user.errors[:url].blank?
         @user.update_attribute(:url, @user.url)
-
         @user.log nil, :rename, "@#{current_user.url} изменил адрес на @#{@user.url}", nil, request.remote_ip
-
-        @user.rename! if params['remove_subscribers'] && params['remove_subscribers'] == '1'
-
+        @user.rename! if params['remove_subscribers'] == '1'
         current_user.url = @user.url
         flash[:good] = 'Прекрасно! Адрес вашего тлога изменен'
       else
@@ -67,7 +63,7 @@ class AccountController < ApplicationController
     else
       @user = current_user
     end
-    render :layout => 'settings'
+    render layout: 'settings'
   end
 
   # потерянный пароль
@@ -146,7 +142,11 @@ class AccountController < ApplicationController
       respond_to do |wants|
         wants.html do
           if params[:p] && params[:p] == 'false'
-            redirect_to(:back) rescue redirect_to(service_url)
+            begin
+              redirect_to(:back)
+            rescue ActionController::RedirectBackError
+              redirect_to(service_url)
+            end
           else
             redirect_to service_url
           end
@@ -178,7 +178,7 @@ class AccountController < ApplicationController
       @user = User.new :email => params[:user][:email], :password => params[:user][:password], :url => params[:user][:url], :openid => nil, :eula => params[:user][:eula]
 
       # проверяем на левые емейл адреса
-      @user.errors.add(:email, 'извините, но выбранный вами почтовый сервис находится в черном списке') if @user.email.any? && Disposable::is_disposable_email?(@user.email)
+      @user.errors.add(:email, 'извините, но выбранный вами почтовый сервис находится в черном списке') if @user.email.present? && Disposable::is_disposable_email?(@user.email)
 
       @user.errors.add(:password, 'пожалуйста, укажите пароль') if @user.password.blank?
 
@@ -241,7 +241,7 @@ class AccountController < ApplicationController
         @user = User.new :email => params[:user][:email], :password => params[:user][:password], :url => params[:user][:url], :eula => params[:user][:eula]
 
         # проверяем на левые емейл адреса
-        @user.errors.add(:email, 'извините, но выбранный вами почтовый сервис находится в черном списке') if @user.email.any? && Disposable::is_disposable_email?(@user.email)
+        @user.errors.add(:email, 'извините, но выбранный вами почтовый сервис находится в черном списке') if @user.email.present? && Disposable::is_disposable_email?(@user.email)
 
         @user.errors.add(:password, 'пожалуйста, укажите пароль') if @user.password.blank?
 

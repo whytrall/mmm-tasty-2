@@ -8,7 +8,7 @@ module SettingsHelper
     url = user_url(current_user, settings_path(:action => url.to_s)) unless url.to_s.starts_with?('http://') || url.to_s.starts_with?('/')
     selected_action = action if selected_action.nil?
 
-    selected_action = selected_action.to_a unless selected_action.is_a?(Array)
+    selected_action = Array(selected_action)
     link_options[:class] = 'selected' if selected_action.include?(params[:action]) || selected_action.include?([params[:controller], params[:action]].join('/'))
 
     if block_given?

@@ -16,18 +16,17 @@ class Time
   def distance_between_in_words(dst, postfix = nil)
     seconds = (self.to_i - dst.to_i).abs
     case seconds
-    when 0..60:
-      "только что"
-    when 1.minute..1.hour:
-      "#{(seconds/1.minute).pluralize("минуту", "минуты", "минут", true)}#{postfix}"
-    when 1.hour..1.day:
-      "#{(seconds/1.hour).pluralize("час", "часа", "часов", true)}#{postfix}"
-    when 1.day..1.week:
-      "#{(seconds/1.day).pluralize("день", "дня", "дней", true)}#{postfix}"
-    when 1.week..1.month:
-      "#{(seconds/1.week).pluralize("неделю", "недели", "недель", true)}#{postfix}"
+    when 0..60 then "только что"
+    when 1.minute..1.hour then
+      "#{(seconds/1.minute).pluralize('минуту', 'минуты', 'минут', true)}#{postfix}"
+    when 1.hour..1.day then
+      "#{(seconds/1.hour).pluralize('час', 'часа', 'часов', true)}#{postfix}"
+    when 1.day..1.week then
+      "#{(seconds/1.day).pluralize('день', 'дня', 'дней', true)}#{postfix}"
+    when 1.week..1.month then
+      "#{(seconds/1.week).pluralize('неделю', 'недели', 'недель', true)}#{postfix}"
     else
-      "#{(seconds/1.month).pluralize("месяц", "месяца", "месяцев", true)}#{postfix}"
+      "#{(seconds/1.month).pluralize('месяц', 'месяца', 'месяцев', true)}#{postfix}"
     end
   end
 end
