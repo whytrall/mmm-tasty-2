@@ -39,6 +39,10 @@ class MainController < ApplicationController
 
   def news
     news = User.find_by_url('news')
+    if news.nil?
+      redirect_to service_url
+      return
+    end
     news.mark_as_viewed_by!(current_user)
 
     @page           = current_page
