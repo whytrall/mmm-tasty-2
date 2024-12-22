@@ -1,8 +1,13 @@
-
 development:
   html_strip: true
   morphology: stem_enru
+  pid_file: tmp/searchd.pid
+  binlog_path: db/sphinx/binlog
+  searchd_file_path: db/sphinx/development
 
 production:
   html_strip: true
   morphology: stem_enru
+  pid_file: tmp/searchd.pid
+  binlog_path: db/sphinx/binlog
+  searchd_file_path: db/sphinx/production
