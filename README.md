@@ -30,7 +30,13 @@ npm --loglevel=error install --global coffeescript
 
 ### Установить нативные зависимости
 ```
-sudo apt-get install mysql-client mysql-server libmysqlclient-dev memcached redis-server libxml2-dev libxslt1-dev imagemagick
+sudo apt-get install mysql-client mysql-server libmysqlclient-dev memcached redis-server libxml2-dev libxslt1-dev imagemagick sphinxsearch
+```
+
+### Устанавить гемы
+```
+rvm repair wrappers
+bundle install
 ```
 
 ### Настроить mysql
@@ -56,20 +62,25 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
 sudo service mysql restart
 ```
 
-### Устанавливаем гемы
-```
-rvm repair wrappers
-bundle install
-```
-
 ### Миграция базы
 ```
 rake db:create
 rake db:migrate
 ```
 
+### Настроить sphinx
+```
+bundle exec rake ts:index
+bundle exec rake ts:start
+```
+
+### И теперь запускаем!
+```
+./script/server
+```
+
 ### Post-setup
-Первый созданный пользователь будет админов. Админство задается вот тут: `User.admins`
+Первый созданный пользователь будет админом. Админство задается вот тут: `User.admins`
 
 Тейсти ожидает, что существуют пользователи `news`, `radio` и `beta`. Без первого не будет работать 
 страница `/main/news`, последствия отсутствия остальных пользователей научно неизвестны
