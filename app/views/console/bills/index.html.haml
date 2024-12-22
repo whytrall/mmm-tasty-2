@@ -22,6 +22,6 @@
         %td= time_ago_in_words invoice.updated_at, true
         %td
           - if invoice.is_pending?
-            = link_to 'Оплатить', console_bill_confirm_path(invoice), :method => :get
+            = link_to 'Оплатить', confirm_console_bill_path(invoice), :method => :get
 
 = bootstrap_paginate @invoices

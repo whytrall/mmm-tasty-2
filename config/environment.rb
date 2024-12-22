@@ -8,6 +8,11 @@ require File.join(File.dirname(__FILE__), '../lib/tlogs')
 
 Rails::Initializer.run do |config|
   config.rails_lts_options = { :default => :hardened }
+
+  config.active_record.yaml_column_permitted_classes = [
+    Symbol, Date, Time, ActiveSupport::TimeWithZone, ActiveSupport::TimeZone, 
+    HashWithIndifferentAccess, BigDecimal
+  ]
   
   config.action_controller.session = { :expire_after => 315576000, :key => Tlogs::SESSION.key, :secret => Tlogs::SESSION.secret }
 
